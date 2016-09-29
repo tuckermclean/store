@@ -1,0 +1,17 @@
+<body>
+  <div class="container">
+    <header>
+      <h1>Blog</h1>
+    </header>
+
+    <ul>
+      {{#each articles}}
+        {{> article}}
+      {{/each}}
+    </ul>
+  </div>
+</body>
+
+<template name="article">
+  <li>{{content}}</li>
+</template>
