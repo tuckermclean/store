@@ -2,16 +2,24 @@
   <div class="container">
     <header>
       <h1>Blog</h1>
+
+      <h2>Post new article</h2>
+
+      <form class="new-article">
+        <p><input type="text" name="title" placeholder="Title" /></p>
+        <p><textarea name="content" placeholder="Content"></textarea></p>
+        <p><input type="submit" value="Post" /></p>
+      </form>
     </header>
 
-    <ul>
-      {{#each articles}}
-        {{> article}}
-      {{/each}}
-    </ul>
+    {{#each articles}}
+      {{> article}}
+    {{/each}}
+
   </div>
 </body>
 
 <template name="article">
-  <li>{{content}}</li>
+  <h3>{{title}}</h3>
+  <p>{{content}}</p>
 </template>
