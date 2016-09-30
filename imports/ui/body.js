@@ -6,6 +6,10 @@ import { Articles } from '../api/articles.js';
 
 import './body.html';
 
+Template.body.onCreated(function bodyOnCreated() {
+  Meteor.subscribe('articles');
+});
+
 Template.body.helpers({
   articles() {
     return Articles.find({}, { sort: { createdAt: -1 } });
@@ -19,17 +23,16 @@ Template.body.events({
 
     // Get value from form element
     const target = event.target;
+    const authorId = target.authorId.value;
     const title = target.title.value;
     const content = target.content.value;
 
     // Insert a task into the collection
-    Articles.insert({
-      title,
-      content,
-      createdAt: new Date(), // current time
-    });
+    Meteor.call('articles.insert',
+      { authorId, title, content });
 
     // Clear form
+    target.authorId.value = '';
     target.title.value = '';
     target.content.value = '';
   },
@@ -47,13 +50,13 @@ Template.body.events({
     const title = $(articleContainer).find('.edit-view .title').val();
     const content = $(articleContainer).find('.edit-view .content').val();
 
-    Articles.update(this._id, { $set: { title, content, editedAt: new Date() } });
+    Meteor.call('articles.update', this._id, { title, content });
 
     $(articleContainer).find('.edit-view').hide();
     $(articleContainer).find('.article-view').show();
   },
   'click .delete'(event) {
     event.preventDefault();
-    Articles.remove(this._id);
+    Meteor.call('articles.remove' ,this._id);
   }
 });
