@@ -1,4 +1,10 @@
 /* CSS declarations go here */
-.edit-view {
-  display: none;  
+.hidden {
+  display: none;
+}
+
+div.comment > div.comment {
+  border-left: 1px solid black;
+  margin-left: 0.1em;
+  padding-left: 0.5em;
 }

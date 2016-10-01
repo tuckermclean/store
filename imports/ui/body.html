@@ -5,11 +5,11 @@
 
       <h2>Post new article</h2>
 
-      <form class="new-article">
+      <form class="post-article">
         <p><input type="text" name="title" placeholder="Title" /></p>
         <p><input type="text" name="authorId" placeholder="Author" /></p>
         <p><textarea name="content" placeholder="Content"></textarea></p>
-        <p><button type="submit">Post</button></p>
+        <p><button type="submit">Post Article</button></p>
       </form>
     </header>
 
@@ -26,16 +26,44 @@
       <h3>{{title}}</h3>
       <p>by {{authorId}}</p>
       <p>{{content}}</p>
-      <p><button class="edit">Edit</button></p>
+      <div class="post-comment-view hidden">
+        <form class="post-comment">
+          <p><input type="text" name="authorId" placeholder="Author" /></p>
+          <p><textarea name="content" placeholder="Content"></textarea></p>
+          <p><button>Post Comment</button></p>
+        </form>
+      </div>
+      <p><button class="comment">Comment</button><button class="edit-article">Edit Article</button></p>
+      <h4>Comments</h4>
+      {{#each comments _id}}
+        {{> comment}}
+      {{/each}}
     </div>
 
-    <div class="edit-view">
-      <form class="edit-article">
-        <p><input type="text" class="title" placeholder="Title" value="{{title}}"/></p>
+    <div class="edit-article-view hidden">
+      <form class="save-article">
+        <p><input type="text" name="title" placeholder="Title" value="{{title}}"/></p>
         <p>Author: {{authorId}}</p>
-        <p><textarea class="content" placeholder="Content">{{content}}</textarea></p>
-        <p><button class="save">Save</button><button class="delete">Delete Post</button></p>
+        <p><textarea name="content" placeholder="Content">{{content}}</textarea></p>
+        <p><button type="submit">Save Article</button><button class="delete-article">Delete Post</button></p>
       </form>
     </div>
+  </div>
+</template>
+
+<template name="comment">
+  <div class="comment">
+    {{authorId}} &mdash; {{content}}
+    <div class="post-comment-view hidden">
+      <form class="post-comment">
+        <p><input type="text" name="authorId" placeholder="Author" /></p>
+        <p><textarea name="content" placeholder="Content"></textarea></p>
+        <p><button>Post Comment</button></p>
+      </form>
+    </div>
+    <button class="comment">Reply</button>
+    {{#each comments _id}}
+      {{> comment}}
+    {{/each}}
   </div>
 </template>
