@@ -5,10 +5,12 @@ import { Random } from 'meteor/random';
 
 export const Comments = new Mongo.Collection('comments');
 
+Comments.getThread = function(parentId) {
+  return Comments.find({parentId});
+};
+
 if (Meteor.isServer) {
-  Meteor.publish('comments', function commentsPublication() {
-    return Comments.find({});
-  });
+  Meteor.publish('comments', Comments.getThread);
 }
 
 Comments.schema = new SimpleSchema({
