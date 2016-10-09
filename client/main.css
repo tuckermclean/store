@@ -8,3 +8,47 @@ div.comment > div.comment {
   margin-left: 0.1em;
   padding-left: 0.5em;
 }
+
+@media (max-width: 768px) {
+  textarea, input[type=text] {
+    min-width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  textarea, input[type=text] {
+    min-width: 50%;
+    max-width: 100%;
+  }
+}
+
+.post-article textarea, .edit-article textarea {
+  min-height: 15em;
+}
+
+.post-comment textarea {
+  min-height: 5em;
+}
+
+.navbar-custom, .navbar-custom .dropdown-menu {
+  background-color: #333333;
+}
+
+.navbar-custom a, .navbar-custom li {
+  color: #ffffff;
+}
+
+.navbar-custom .open > a,
+.navbar-custom .open > a:hover,
+.navbar-custom .open > a:focus,
+.navbar-custom a:hover,
+.navbar-custom a:focus,
+.navbar-custom li.active a {
+  color: #333333;
+  background-color: #cccccc;
+}
+
+.navbar-custom .navbar-toggle span.icon-bar {
+  background-color: #ffffff;
+}

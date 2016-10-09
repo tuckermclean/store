@@ -20,6 +20,11 @@ shell-server@0.2.1            # Server-side component of the `meteor shell` comm
 
 aldeed:collection2
 reactive-dict@1.1.8
-accounts-ui@1.1.9
-accounts-google@1.0.10
-accounts-facebook@1.0.10
+markdown
+session
+stylus
+bootswatch:paper
+ian:accounts-ui-bootstrap-3
+accounts-facebook
+accounts-google
+accounts-password

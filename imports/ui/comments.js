@@ -54,3 +54,10 @@ Template.postComment.events({
     return false;
   }
 });
+
+Template.replyComment.events({
+  'click .js-cancel'(event) {
+    isReplying.set(this._id, false);
+    return false;
+  }
+});

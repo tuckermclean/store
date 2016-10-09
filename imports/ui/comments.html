@@ -1,13 +1,18 @@
 <template name="comment">
   <div class="comment" data-id="{{_id}}">
-    {{authorName}} &mdash; {{content}}
-    {{#unless isReplying}}
+
+    <div class="author">{{authorName}}
       {{#if currentUser}}
-        <button class="js-reply">Reply</button>
+        <button class="js-reply btn btn-default btn-xs">Reply</button>
       {{/if}}
-    {{else}}
-      {{> postComment}}
-    {{/unless}}
+    </div>
+
+    {{#markdown}}{{content}}{{/markdown}}
+
+    {{#if isReplying}}
+      {{> replyComment}}
+    {{/if}}
+
     {{#each comments}}
       {{> comment}}
     {{/each}}
@@ -18,7 +23,19 @@
   <div class="post-comment">
     <form>
       <p><textarea name="content" placeholder="Content"></textarea></p>
-      <p><button type="submit">Post Comment</button></p>
+      <p><button type="submit" class="btn btn-primary">Post Comment</button></p>
+    </form>
+  </div>
+</template>
+
+<template name="replyComment">
+  <div class="reply-comment">
+    <form>
+      <p><textarea name="content" placeholder="Content"></textarea></p>
+      <p>
+        <button type="submit" class="btn btn-primary">Post Comment</button>
+        <button class="js-cancel btn btn-default">Cancel</button>
+      </p>
     </form>
   </div>
 </template>

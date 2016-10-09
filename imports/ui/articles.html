@@ -12,19 +12,21 @@
   <form class="post-article">
     <p><input type="text" name="title" placeholder="Title" /></p>
     <p><textarea name="content" placeholder="Content"></textarea></p>
-    <p><button type="submit">Post Article</button></p>
+    <p><button type="submit" class="btn btn-primary">Post Article</button></p>
   </form>
 </template>
 
 <template name="displayArticle">
   <div class="display-article">
     <h3>{{title}}</h3>
-    <p>by {{authorName}}</p>
+    <div class="author">
+      {{authorName}}
+      {{#if isAuthor}}
+        <button class="js-edit btn btn-default btn-xs">Edit Article</button>
+      {{/if}}
+    </div>
 
-    <p>{{content}}</p>
-    {{#if isAuthor}}
-      <p><button class="js-edit">Edit Article</button></p>
-    {{/if}}
+    {{#markdown}}{{content}}{{/markdown}}
 
     {{#if currentUser}}
       <h4>Post a Comment</h4>
@@ -45,6 +47,8 @@
   <form class="edit-article">
     <p><input type="text" name="title" placeholder="Title" value="{{title}}"/></p>
     <p><textarea name="content" placeholder="Content">{{content}}</textarea></p>
-    <p><button type="submit">Save Article</button><button class="js-delete">Delete Post</button></p>
+    <p><button type="submit" class="btn btn-primary">Save Article</button>
+      <button class="js-cancel btn btn-default">Cancel</button>
+      <button class="js-delete btn btn-danger">Delete Post</button></p>
   </form>
 </template>

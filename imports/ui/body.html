@@ -1,32 +1,50 @@
 <body>
-{{#if connected}}
-  <div class="container">
-    <header>
-      <h1>Blog</h1>
-    </header>
+  {{#if connected}}
 
-    {{> loginButtons}}
+    <nav class="navbar navbar-custom">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#body-navbar-collapse" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Store</a>
+      </div>
 
-    {{#if currentUser}}
-      <h2>Post new article</h2>
-      {{> postArticle}}
-    {{else}}
-      <p>Log in to post an article or comment</p>
-    {{/if}}
+      <div class="collapse navbar-collapse" id="body-navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/products">Products <span class="sr-only">(current)</span></a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            {{> loginButtons}}
+        </ul>
+      </div>
+    </nav>
 
-    <hr />
+    <div class="container-fluid">
 
-    <h2>Articles</h2>
+      {{#if currentUser}}
+        <h2>Post new article</h2>
+        {{> postArticle}}
+      {{else}}
+        <p>Log in to post an article or comment</p>
+      {{/if}}
 
-    {{#each articles}}
-      {{> article}}
       <hr />
-    {{else}}
-      <p>No articles yet!</p>
-    {{/each}}
 
-  </div>
-{{else}}
-  <p>Loading</p>
-{{/if}}
+      {{#each articles}}
+        {{> article}}
+        <hr />
+      {{else}}
+        <p>No articles yet!</p>
+      {{/each}}
+
+    </div>
+  {{else}}
+    <div class="container">
+      <p>Loading</p>
+    </div>
+  {{/if}}
 </body>

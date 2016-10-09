@@ -76,5 +76,9 @@ Template.editArticle.events({
   'click .js-delete'(event) {
     Meteor.call('articles.remove' ,this._id);
     return false;
+  },
+  'click .js-cancel'(event) {
+    isEditing.set(this._id, false);
+    return false;
   }
 });
