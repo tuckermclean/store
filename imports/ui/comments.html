@@ -1,8 +1,10 @@
 <template name="comment">
   <div class="comment" data-id="{{_id}}">
-    {{authorId}} &mdash; {{content}}
+    {{authorName}} &mdash; {{content}}
     {{#unless isReplying}}
-      <button class="js-reply">Reply</button>
+      {{#if currentUser}}
+        <button class="js-reply">Reply</button>
+      {{/if}}
     {{else}}
       {{> postComment}}
     {{/unless}}
@@ -15,7 +17,6 @@
 <template name="postComment">
   <div class="post-comment">
     <form>
-      <p><input type="text" name="authorId" placeholder="Author" /></p>
       <p><textarea name="content" placeholder="Content"></textarea></p>
       <p><button type="submit">Post Comment</button></p>
     </form>

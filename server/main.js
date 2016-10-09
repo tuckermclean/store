@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import '../imports/api/users.js';
 import '../imports/api/articles.js';
 import '../imports/api/comments.js';
 

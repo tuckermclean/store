@@ -17,12 +17,18 @@ Template.article.onCreated(function() {
 Template.article.helpers({
   isEditing() {
     return isEditing.get(this._id);
+  },
+  articles() {
+    return Articles.find({}, { sort: { createdAt: -1 } });
   }
 });
 
 Template.displayArticle.helpers({
   comments() {
     return Comments.getThread(this._id);
+  },
+  isAuthor() {
+    return this.authorId === Meteor.userId();
   }
 });
 
@@ -30,7 +36,7 @@ Template.postArticle.events({
   'submit form'(event) {
     // Get value from form element
     const target = event.target;
-    const authorId = target.authorId.value;
+    const authorId = Meteor.userId();
     const title = target.title.value;
     const content = target.content.value;
 
@@ -39,7 +45,6 @@ Template.postArticle.events({
       { authorId, title, content });
 
     // Clear form
-    target.authorId.value = '';
     target.title.value = '';
     target.content.value = '';
 

@@ -1,18 +1,32 @@
 <body>
+{{#if connected}}
   <div class="container">
     <header>
       <h1>Blog</h1>
     </header>
 
-    <h3>Post new article</h3>
+    {{> loginButtons}}
 
-    {{> postArticle}}
+    {{#if currentUser}}
+      <h2>Post new article</h2>
+      {{> postArticle}}
+    {{else}}
+      <p>Log in to post an article or comment</p>
+    {{/if}}
 
-    <h3>Articles</h3>
+    <hr />
+
+    <h2>Articles</h2>
 
     {{#each articles}}
       {{> article}}
+      <hr />
+    {{else}}
+      <p>No articles yet!</p>
     {{/each}}
 
   </div>
+{{else}}
+  <p>Loading</p>
+{{/if}}
 </body>

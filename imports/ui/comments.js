@@ -19,6 +19,9 @@ Template.comment.helpers({
   },
   isReplying() {
     return isReplying.get(this._id);
+  },
+  isAuthor() {
+    return this.authorId === Meteor.userId();
   }
 });
 
@@ -32,7 +35,7 @@ Template.comment.events({
 Template.postComment.events({
   'submit form'(event) {
     const target = event.target;
-    const authorId = target.authorId.value;
+    const authorId = Meteor.userId();
     const content = target.content.value;
 
     Meteor.call('comments.insert', {
@@ -45,7 +48,6 @@ Template.postComment.events({
     });
 
     // Clear form
-    target.authorId.value = '';
     target.content.value = '';
 
     isReplying.set(this._id, false);
