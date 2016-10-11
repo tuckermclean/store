@@ -10,10 +10,10 @@ import './body.html';
 Tracker.autorun(function() {
   Meteor.subscribe('userData');
   const user = Meteor.users.findOne({});
-  if (user === undefined) {
-    Session.set('connected', false);
-  } else {
+  if (user !== undefined && Meteor.status().connected) {
     Session.set('connected', true);
+  } else {
+    Session.set('connected', false);
   }
 })
 
@@ -27,5 +27,15 @@ Template.body.helpers({
   },
   connected() {
     return Session.get('connected');
+  },
+  isPosting() {
+    return Session.get('isPosting');
+  }
+});
+
+Template.body.events({
+  'click .js-post'(event) {
+    Session.set('isPosting', true);
+    return false;
   }
 });

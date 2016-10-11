@@ -35,16 +35,34 @@ div.comment > div.comment {
   background-color: #333333;
 }
 
+.navbar-custom .btn-default {
+  background: #000000;
+  color: #ffffff;
+  border-color: #555555;
+}
+
+.navbar-custom input[type=text],
+.navbar-custom input[type=email],
+.navbar-custom input[type=password] {
+  color: #ffffff;
+}
+
 .navbar-custom a, .navbar-custom li {
   color: #ffffff;
 }
 
-.navbar-custom .open > a,
-.navbar-custom .open > a:hover,
-.navbar-custom .open > a:focus,
-.navbar-custom a:hover,
-.navbar-custom a:focus,
-.navbar-custom li.active a {
+.navbar-custom .login-button {
+  color: #ffffff !important;
+}
+
+.navbar-custom li:hover > a,
+.navbar-custom li:focus > a,
+.navbar-custom li.active > a,
+.navbar-custom li.active:hover > a,
+.navbar-custom li.active:focus > a,
+.navbar-custom li.open > a,
+.navbar-custom li.open:hover > a,
+.navbar-custom li.open:focus > a {
   color: #333333;
   background-color: #cccccc;
 }

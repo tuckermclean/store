@@ -26,13 +26,13 @@
     <div class="container-fluid">
 
       {{#if currentUser}}
-        <h2>Post new article</h2>
-        {{> postArticle}}
-      {{else}}
-        <p>Log in to post an article or comment</p>
+        {{#if isPosting}}
+          {{> postArticle}}
+        {{else}}
+          <p><button class="js-post btn btn-primary">Post new article</button></p>
+        {{/if}}
+        <hr />
       {{/if}}
-
-      <hr />
 
       {{#each articles}}
         {{> article}}

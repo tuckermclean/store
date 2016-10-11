@@ -20,7 +20,6 @@ shell-server@0.2.1            # Server-side component of the `meteor shell` comm
 
 aldeed:collection2
 reactive-dict@1.1.8
-markdown
 session
 stylus
 bootswatch:paper
@@ -28,3 +27,5 @@ ian:accounts-ui-bootstrap-3
 accounts-facebook
 accounts-google
 accounts-password
+perak:markdown
+emojione:emojione

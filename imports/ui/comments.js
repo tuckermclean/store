@@ -6,10 +6,10 @@ import { Comments } from '../api/comments.js';
 
 import './comments.html';
 
-export const isReplying = new ReactiveDict();
+export const isCommenting = new ReactiveDict();
 
 Template.comment.onCreated(function() {
-  isReplying.set(this.data._id, false);
+  isCommenting.set(this.data._id, false);
   Meteor.subscribe('comments', this.data._id);
 });
 
@@ -17,8 +17,8 @@ Template.comment.helpers({
   comments() {
     return Comments.getThread(this._id);
   },
-  isReplying() {
-    return isReplying.get(this._id);
+  isCommenting() {
+    return isCommenting.get(this._id);
   },
   isAuthor() {
     return this.authorId === Meteor.userId();
@@ -27,9 +27,13 @@ Template.comment.helpers({
 
 Template.comment.events({
   'click .js-reply'(event) {
-    isReplying.set(this._id, true);
+    isCommenting.set(this._id, true);
     return false;
   }
+});
+
+Template.postComment.onRendered(function() {
+  this.find('textarea').focus();
 });
 
 Template.postComment.events({
@@ -50,14 +54,11 @@ Template.postComment.events({
     // Clear form
     target.content.value = '';
 
-    isReplying.set(this._id, false);
+    isCommenting.set(this._id, false);
     return false;
-  }
-});
-
-Template.replyComment.events({
+  },
   'click .js-cancel'(event) {
-    isReplying.set(this._id, false);
+    isCommenting.set(this._id, false);
     return false;
   }
 });

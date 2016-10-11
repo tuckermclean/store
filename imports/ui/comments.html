@@ -7,10 +7,12 @@
       {{/if}}
     </div>
 
-    {{#markdown}}{{content}}{{/markdown}}
+    <div class="comment-content">
+      {{#markdown}}{{#emojione}}{{content}}{{/emojione}}{{/markdown}}
+    </div>
 
-    {{#if isReplying}}
-      {{> replyComment}}
+    {{#if isCommenting}}
+      {{> postComment}}
     {{/if}}
 
     {{#each comments}}
@@ -21,15 +23,11 @@
 
 <template name="postComment">
   <div class="post-comment">
-    <form>
-      <p><textarea name="content" placeholder="Content"></textarea></p>
-      <p><button type="submit" class="btn btn-primary">Post Comment</button></p>
-    </form>
-  </div>
-</template>
-
-<template name="replyComment">
-  <div class="reply-comment">
+    <p class="small">
+      You can style comments with <a href="https://guides.github.com/features/mastering-markdown/">Markdown</a>.
+      Try <code>**bold text**</code> for <strong>bold text</strong>, or
+      <a href="http://www.emoji-cheat-sheet.com/">emoji</a>. {{#emojione}}:pizza::yum:{{/emojione}}
+    </p>
     <form>
       <p><textarea name="content" placeholder="Content"></textarea></p>
       <p>

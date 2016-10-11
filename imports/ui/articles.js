@@ -1,9 +1,13 @@
 import { Template } from 'meteor/templating';
 import { Meteor } from 'meteor/meteor';
 import { ReactiveDict } from 'meteor/reactive-dict';
+import { Session } from 'meteor/session';
+import { $ } from 'meteor/jquery';
 
 import { Articles } from '../api/articles.js';
 import { Comments } from '../api/comments.js';
+
+import { isCommenting } from './comments.js';
 
 import './articles.html';
 
@@ -11,6 +15,7 @@ export const isEditing = new ReactiveDict();
 
 Template.article.onCreated(function() {
   isEditing.set(this.data._id, false);
+  isCommenting.set(this.data._id, false);
   Meteor.subscribe('comments', this.data._id);
 });
 
@@ -29,7 +34,14 @@ Template.displayArticle.helpers({
   },
   isAuthor() {
     return this.authorId === Meteor.userId();
+  },
+  isCommenting() {
+    return isCommenting.get(this._id);
   }
+});
+
+Template.editArticle.onRendered(function() {
+  this.find('textarea').focus();
 });
 
 Template.postArticle.events({
@@ -49,11 +61,21 @@ Template.postArticle.events({
     target.content.value = '';
 
     isEditing.set(this._id, false);
+    Session.set('isPosting', false);
+    isCommenting.set(this._id, false);
     return false;
   },
+  'click .js-cancel'(event) {
+    Session.set('isPosting', false);
+    return false;
+  }
 });
 
 Template.displayArticle.events({
+  'click .js-comment'(event) {
+    isCommenting.set(this._id, true);
+    return false;
+  },
   'click .js-edit'(event) {
     isEditing.set(this._id, true);
     return false;
@@ -71,6 +93,7 @@ Template.editArticle.events({
     Meteor.call('articles.update', this._id, { title, content });
 
     isEditing.set(this._id, false);
+    isCommenting.set(this._id, false);
     return false;
   },
   'click .js-delete'(event) {
